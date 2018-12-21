@@ -6,14 +6,13 @@ class Txc extends Component {
     let divs = Object.keys(counts).map((val)=>
         <div className='circle' key={'count_'+col+val}>
             <span>{counts[val]}</span><br/>
-            {val}<br/>   
-            {col}  
+            {val}  
         </div>
     );
     return (
-           <div key={'count_' + col}>
+           <td>
                {divs}
-           </div>
+           </td>
     )
   }
 }

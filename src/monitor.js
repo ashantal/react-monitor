@@ -23,8 +23,16 @@ class Ecm extends Component {
             (col)=>
             {
                 var count = this.state.counts[col]===undefined?{}:this.state.counts[col];
-                let v = tx[col].split(' ')[0];
-                count[v] = count[v]===undefined ? 1 : count[v]+1
+                let cna = tx[col].split(' ')
+                let name = ''
+                if(cna.length>1){
+                    cna.forEach((n)=>{
+                        name = name + n.substring(0,1)
+                    })
+                }else{
+                    name = cna[0]
+                }
+                count[name] = count[name]===undefined ? 1 : count[name]+1
 
                 this.state.counts[col] = count                
             })      
@@ -32,14 +40,15 @@ class Ecm extends Component {
     })      
   }
   render() {
+    let data = this.state.data;
     let header = 
                 <tr><th>connecting</th></tr>
     let rows = 
                 <tr><td>waiting</td></tr>
-    if(this.state.data.length>0){
+    if(data.length>0){
         header =
-         <Txh key={'txh_' + this.state.data[0].block} tx={this.state.data[0]}/>
-        rows = this.state.data.map((data)=>
+         <Txh key={'txh_' + data[0].block} tx={data[0]}/>
+        rows = data.slice(0).reverse().map((data)=>
                 <Txr key={'txr_'+data.block} tx={data}/>
                 );
     }
@@ -48,16 +57,21 @@ class Ecm extends Component {
                 );
     return (
         <div key='monitor'>
-            <div id='count_holder'>
-                {counts}
-            </div>
             <div id='log'>
-                <table>
-                    <tbody>
-                        {header}
-                        {rows}
-                    </tbody>
-                </table>
+            <table>
+                <tbody>
+                    <tr>
+                        {counts}
+                    </tr>
+                </tbody>
+            </table>
+            <hr></hr>
+            <table>
+                <tbody>
+                    {header}
+                    {rows}
+                </tbody>
+            </table>
             </div>
        </div>
     )

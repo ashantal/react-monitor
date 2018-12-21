@@ -28,32 +28,39 @@
 table{
   width: 100vw;
 }
+th{
+  font-size: 1vw;
+  margin-right: 1vw;
+  text-align: left;
+  color: white;
+}
+tr:nth-child(even) { background: #282c34;}
+td{
+  padding-right: 1vw;
+  text-align: left;
+}
+hr{
+  border: 1px solid grey;
+}
 .circle{
-  font-size:1vw;
+  font-size:.8vw;
   color:white; 
   text-align:center;
   overflow:hidden; 
   float: left; 
   background: #282c34; 
-  width: 6vw; 
-  height: 6vw; 
+  width: 5vw; 
+  height: 5vw; 
   border-radius:5vw;
-  padding:1vw;
+  padding:.5vw;
   border:1pt black solid
 }
-.circle span { color: #61dafb; font-weight: bold; font-size: 2vw }
-
-#count_holder{
-  float: left;
-  width: 100vw;
-  height: 40vh;
-}
+.circle span { color: #61dafb; font-weight: bold; font-size: 2.5vw }
 
 #log{
-  font-size: 1vw;
+  font-size: .8vw;
   width:100vw;
-  height: 60vh;
-  float: left;
+  height:100vh;
   overflow:scroll;
 }
 @keyframes App-logo-spin {

@@ -8,7 +8,7 @@ class Txh extends Component {
         <th key={b + val}>{val}</th>
     );
     return (
-       <tr key={b+'_header'}>
+       <tr>
            <th>Block</th>{th}
        </tr>
     )

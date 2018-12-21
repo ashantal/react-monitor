@@ -8,7 +8,7 @@ class Txr extends Component {
         <td key={'tx_'+b+val}>{tx[val]}</td>
     );
     return (
-           <tr key={'tx_'+b}>
+           <tr>
                 <td>{b}</td>
                {td}
            </tr>
