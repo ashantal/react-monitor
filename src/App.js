@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div className="App" key='app'>
         <header className="App-header">
+          Event Catalog Monitor
           <img src={logo} className="App-logo" alt="logo" />
         </header>
         <div className="App-log">

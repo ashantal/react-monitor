@@ -1,14 +1,19 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 5vmin;
-  width: 4vw
+  height: 5vh;
+  width: 5vw;
+  align-self: right;
+  position: absolute;
+  left: 0;
+  top:0;
 }
 
 .App-header {
+  padding-left: 5vw;
   background-color: #282c34;
   min-height: 5vh;
   display: flex;
@@ -22,11 +27,13 @@
 .App-log {
   background-color: black;
   color: #61dafb;
-  min-height: 95vh;
+  height: 95vh;
+  width: 100vw;
 }
 
+
 table{
-  width: 100vw;
+  width: 70vw;
 }
 th{
   font-size: 1vw;
@@ -59,9 +66,16 @@ hr{
 
 #log{
   font-size: .8vw;
-  width:100vw;
+  width:70vw;
   height:100vh;
   overflow:scroll;
+  float: left;
+}
+#term {
+  float: left;
+  height: 100vh;
+  width: 30vw;
+  font-size: 1vw;
 }
 @keyframes App-logo-spin {
   from {

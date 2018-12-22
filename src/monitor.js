@@ -3,18 +3,21 @@ import socketIOClient from 'socket.io-client'
 import Txh from './tx_header'
 import Txr from './tx_row'
 import Txc from './tx_count'
+import Term from './term'
+let  counts = {}
+
 class Ecm extends Component {
   constructor() {
     super()
     this.state = {
         endpoint: "http://localhost:3001",
-        data : [],
-        counts : {}
+        data : []
     }    
     const socket = socketIOClient(this.state.endpoint)
     socket.on('connect', (msg) => {
-      this.setState({data:[], counts:{}})
-      socket.emit('sync', 3)
+       counts = {}
+       this.setState({data:[]})
+       socket.emit('sync', 30)
     })    
     socket.on('event', (msg) => {
         let tx = JSON.parse(msg.transaction)
@@ -22,7 +25,7 @@ class Ecm extends Component {
         Object.keys(tx).forEach(
             (col)=>
             {
-                var count = this.state.counts[col]===undefined?{}:this.state.counts[col];
+                var count = counts[col]===undefined?{}:counts[col];
                 let cna = tx[col].split(' ')
                 let name = ''
                 if(cna.length>1){
@@ -34,7 +37,7 @@ class Ecm extends Component {
                 }
                 count[name] = count[name]===undefined ? 1 : count[name]+1
 
-                this.state.counts[col] = count                
+                counts[col] = count                
             })      
         this.setState({data : this.state.data.concat(msg)})
     })      
@@ -52,16 +55,16 @@ class Ecm extends Component {
                 <Txr key={'txr_'+data.block} tx={data}/>
                 );
     }
-    let counts = Object.keys(this.state.counts).map((col,key)=>
-                <Txc key={'txc_'+ key}  col={col} counts={this.state.counts[col]}></Txc>
+    let counters = Object.keys(counts).map((col,key)=>
+                <Txc key={'txc_'+ key}  col={col} counts={counts[col]}></Txc>
                 );
     return (
-        <div key='monitor'>
+        <div>
             <div id='log'>
             <table>
                 <tbody>
                     <tr>
-                        {counts}
+                        {counters}
                     </tr>
                 </tbody>
             </table>
@@ -72,6 +75,9 @@ class Ecm extends Component {
                     {rows}
                 </tbody>
             </table>
+            </div>
+            <div id='term'>
+                <Term  counts={counts}/>            
             </div>
        </div>
     )
