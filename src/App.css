@@ -1,3 +1,7 @@
+body{
+  background-color: black;
+
+}
 .App {
   text-align: left;
 }
@@ -22,10 +26,11 @@
   align-content: flex-end;
   font-size: calc(10px + 2vmin);
   color: white;
+  border-bottom: black 1px solid;
+
 }
 
 .App-log {
-  background-color: black;
   color: #61dafb;
   height: 95vh;
   width: 100vw;
@@ -33,7 +38,7 @@
 
 
 table{
-  width: 70vw;
+  font-size: .8vw;
 }
 th{
   font-size: 1vw;
@@ -41,42 +46,42 @@ th{
   text-align: left;
   color: white;
 }
-tr:nth-child(even) { background: #282c34;}
 td{
   padding-right: 1vw;
   text-align: left;
 }
-hr{
-  border: 1px solid grey;
+
+.count { 
+  color: #61dafb; 
+  font-weight: bold; 
+  font-size: 1vw; 
+  margin: .5vw;
 }
-.circle{
-  font-size:.8vw;
-  color:white; 
-  text-align:center;
-  overflow:hidden; 
-  float: left; 
-  background: #282c34; 
-  width: 5vw; 
-  height: 5vw; 
-  border-radius:5vw;
-  padding:.5vw;
-  border:1pt black solid
-}
-.circle span { color: #61dafb; font-weight: bold; font-size: 2.5vw }
 
 #log{
   font-size: .8vw;
-  width:70vw;
+  width:14vw;
   height:100vh;
-  overflow:scroll;
   float: left;
+  background-color: #282c34;
+  overflow: scroll;
+  padding-left: .5vw; 
+  padding-top: .5vw; 
+}
+#events{
+  float: left;
+  height: 20vh;
+  width: 85vw;
+  overflow:scroll;
+  font-size: 1vw;
 }
 #term {
   float: left;
-  height: 100vh;
-  width: 30vw;
-  font-size: 1vw;
+  height: 70vh;
+  width: 85vw;
+  font-size: .8em;
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

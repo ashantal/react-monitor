@@ -61,23 +61,16 @@ class Ecm extends Component {
     return (
         <div>
             <div id='log'>
-            <table>
-                <tbody>
-                    <tr>
-                        {counters}
-                    </tr>
-                </tbody>
-            </table>
-            <hr></hr>
-            <table>
-                <tbody>
-                    {header}
-                    {rows}
-                </tbody>
-            </table>
+                {counters}
+            </div>
+            <div id='events'>
+                <table>
+                {header}
+                {rows}
+                </table>
             </div>
             <div id='term'>
-                <Term  counts={counts}/>            
+                <Term  counts={counts} data={data}/>            
             </div>
        </div>
     )
