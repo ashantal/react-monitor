@@ -4,41 +4,15 @@ import Txh from './tx_header'
 import Txr from './tx_row'
 import Txc from './tx_count'
 import Term from './term'
-let  counts = {}
+import Subscribe, {Counts} from './events'
 
 class Ecm extends Component {
   constructor() {
     super()
     this.state = {
-        endpoint: "http://localhost:3001",
         data : []
     }    
-    const socket = socketIOClient(this.state.endpoint)
-    socket.on('connect', (msg) => {
-       counts = {}
-       this.setState({data:[]})
-       socket.emit('sync', 30)
-    })    
-    socket.on('event', (msg) => {
-        let tx = JSON.parse(msg.transaction)
-        msg.transaction = tx
-        Object.keys(tx).forEach(
-            (col)=>
-            {
-                var count = counts[col]===undefined?{}:counts[col];
-                let cna = tx[col].split(' ')
-                let name = ''
-                if(cna.length>1){
-                    cna.forEach((n)=>{
-                        name = name + n.substring(0,1)
-                    })
-                }else{
-                    name = cna[0]
-                }
-                count[name] = count[name]===undefined ? 1 : count[name]+1
-
-                counts[col] = count                
-            })      
+    Subscribe((msg) => {
         this.setState({data : this.state.data.concat(msg)})
     })      
   }
@@ -55,8 +29,8 @@ class Ecm extends Component {
                 <Txr key={'txr_'+data.block} tx={data}/>
                 );
     }
-    let counters = Object.keys(counts).map((col,key)=>
-                <Txc key={'txc_'+ key}  col={col} counts={counts[col]}></Txc>
+    let counters = Object.keys(Counts).map((col,key)=>
+                <Txc key={'txc_'+ key}  col={col} counts={Counts[col]}></Txc>
                 );
     return (
         <div>
@@ -70,7 +44,7 @@ class Ecm extends Component {
                 </table>
             </div>
             <div id='term'>
-                <Term  counts={counts} data={data}/>            
+                <Term  counts={Counts} data={data}/>            
             </div>
        </div>
     )

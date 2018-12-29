@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Terminal from 'terminal-in-react';
+
 let counts = {};
 let data = {};
 class Term extends Component {
